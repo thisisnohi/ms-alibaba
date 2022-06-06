@@ -1,0 +1,25 @@
+info:
+  app:
+    name: ${spring.application.name}
+  company:
+    name: nohi
+  build:
+    artifactId: @project.artifactId@
+    version: @project.version@
+server:
+  port: 8081
+spring:
+  application:
+    name: @project.artifactId@
+  cloud:
+    nacos:
+      discovery:
+#        server-addr: 10.0.0.210:80
+        server-addr: 127.0.0.1:8848
+        group: cloud-alibaba
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

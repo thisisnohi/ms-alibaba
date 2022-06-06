@@ -1,0 +1,24 @@
+info:
+  app:
+    name: ${spring.application.name}
+  company:
+    name: nohi
+  build:
+    artifactId: @project.artifactId@
+    version: @project.version@
+spring:
+  application:
+    name: @project.artifactId@
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        group: cloud-alibaba
+        encode: utf-8
+        file-extension: yml
+      discovery:
+        server-addr: 127.0.0.1:8848
+        group: cloud-alibaba
+
+
+
