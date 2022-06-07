@@ -22,7 +22,7 @@ public class HelloController {
 
     @GetMapping(value = "/echo/{string}")
     public String echo(@PathVariable String string) {
-        log.info("ApServerOne.HelloController.echo...");
-        return "Hello Nacos Discovery " + string;
+        log.info("ApServerOne.HelloController.echo...{}", string);
+        return "Hello Nacos Discovery, ApServerOne " + string;
     }
 }
