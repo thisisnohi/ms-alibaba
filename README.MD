@@ -10,6 +10,7 @@ Spring Cloud alibaba 学习
     * ap监控endpoint http://localhost:8081/actuator/nacosdiscovery
   * 配置中心
     * apserver-one-dev.yaml
+    * ap监控config: http://localhost:8081/actuator/nacosconfig
   ```yaml
   ap:
     int-val: 1

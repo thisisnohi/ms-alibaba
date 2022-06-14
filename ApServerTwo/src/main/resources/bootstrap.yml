@@ -17,6 +17,11 @@ spring:
         group: cloud-alibaba
         encode: utf-8
         file-extension: yml
+        # 公用配置
+        shared-configs[0]:
+          data-id: cloud-common.yml # 配置文件名-Data Id
+          group: cloud-alibaba   # 默认为DEFAULT_GROUP
+          refresh: false   # 是否动态刷新，默认为false
 
 management:
   endpoints:

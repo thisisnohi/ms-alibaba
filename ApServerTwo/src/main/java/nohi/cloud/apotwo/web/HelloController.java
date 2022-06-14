@@ -1,6 +1,7 @@
-package nohi.cloud.apone.web;
+package nohi.cloud.apotwo.web;
 
 import lombok.extern.slf4j.Slf4j;
+import nohi.cloud.apotwo.config.ApConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -15,25 +16,23 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Slf4j
 public class HelloController {
-
     @Autowired
     private LoadBalancerClient loadBalancerClient;
     @Autowired
     private RestTemplate restTemplate;
-
     @Autowired
     RestTemplate restTemplateNoLA;
-
     @Value("${spring.application.name:}")
     private String appName;
-
     @Value("${test.conf1:conf1}")
     private String conf1;
+    @Autowired
+    private ApConfig apConfig;
 
     @GetMapping(value = "/")
     public String index() {
-        log.info("HelloController.index...");
-        return "Hello";
+        log.info("HelloController.index...{}", apConfig.toString());
+        return "Hello " + apConfig.toString();
     }
 
     @RequestMapping(value = "/echo/{str}", method = RequestMethod.GET)

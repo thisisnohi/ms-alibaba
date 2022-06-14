@@ -1,2 +1,6 @@
 ### Send POST request with json body
 GET http://{{server}}/echo/abc
+
+### Send POST request with json body
+GET http://{{server}}/
+
