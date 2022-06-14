@@ -1,4 +1,4 @@
-package nohi.cloud.aptwo.config;
+package nohi.cloud.apone.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

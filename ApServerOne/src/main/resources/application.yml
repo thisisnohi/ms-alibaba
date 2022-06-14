@@ -1,9 +1,1 @@
-server:
-  port: 8081
-spring:
-  cloud:
-    nacos:
-      discovery:
-        namespace: dev
-        server-addr: home.nohi.online:28848
-        group: cloud-alibaba
+

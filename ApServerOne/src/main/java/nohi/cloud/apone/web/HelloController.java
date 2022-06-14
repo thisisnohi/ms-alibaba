@@ -1,7 +1,7 @@
-package nohi.cloud.aptwo.web;
+package nohi.cloud.apone.web;
 
 import lombok.extern.slf4j.Slf4j;
-import nohi.cloud.aptwo.config.ApConfig;
+import nohi.cloud.apone.config.ApConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
