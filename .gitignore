@@ -38,3 +38,5 @@ build/
 .DS_Store
 
 /.idea/
+/ApServerOne/src/main/resources/bootstrap-dev.yml
+/ApServerTwo/src/main/resources/bootstrap-dev.yml
