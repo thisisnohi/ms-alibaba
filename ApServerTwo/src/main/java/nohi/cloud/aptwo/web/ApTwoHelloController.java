@@ -1,7 +1,7 @@
-package nohi.cloud.apthree.web;
+package nohi.cloud.aptwo.web;
 
 import lombok.extern.slf4j.Slf4j;
-import nohi.cloud.apthree.config.ApConfig;
+import nohi.cloud.aptwo.config.ApConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -23,7 +23,7 @@ public class ApTwoHelloController {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
-    RestTemplate restTemplateNoLA;
+    RestTemplate restTemplateNoLa;
     @Value("${spring.application.name:}")
     private String appName;
     @Value("${test.conf1:conf1}")
@@ -50,7 +50,7 @@ public class ApTwoHelloController {
         ServiceInstance serviceInstance = loadBalancerClient.choose("apserver-one");
         String url = String.format("http://%s:%s/echo/%s", serviceInstance.getHost(), serviceInstance.getPort(), appName);
         log.info("request url:" + url);
-        return "Cur[AP-TWO] [AP-ONE]响应:" + restTemplateNoLA.getForObject(url, String.class);
+        return "Cur[AP-TWO] [AP-ONE]响应:" + restTemplateNoLa.getForObject(url, String.class);
     }
 
 }

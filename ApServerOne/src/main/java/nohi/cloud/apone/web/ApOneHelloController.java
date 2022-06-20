@@ -1,4 +1,4 @@
-package nohi.cloud.apthree.web;
+package nohi.cloud.apone.web;
 
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.SphO;
@@ -9,7 +9,7 @@ import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import lombok.extern.slf4j.Slf4j;
-import nohi.cloud.apthree.config.ApConfig;
+import nohi.cloud.apone.config.ApConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -34,13 +34,15 @@ public class ApOneHelloController {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
-    RestTemplate restTemplateNoLA;
+    RestTemplate restTemplateNoLa;
     @Value("${spring.application.name:}")
     private String appName;
     @Value("${test.conf1:conf1}")
     private String conf1;
     @Autowired
     private ApConfig apConfig;
+
+    private final String GET_HELLO = "getHello";
 
     @GetMapping(value = "/")
     @SentinelResource("apOne主页")
@@ -51,12 +53,12 @@ public class ApOneHelloController {
 
     /**
      * 自定义限流规则
-     * @return
+     * @return sring
      */
     @GetMapping(value = "/testRule")
     public String testRule() {
         // 使用限流规则，保护”业务逻辑“
-        try(Entry entry = SphU.entry("apOne.testRule")) {
+        try(Entry entry = SphU.entry(GET_HELLO)) {
             log.info("apOne.testRule OK");
             // 正常的业务逻辑
             return "OK testRule";
@@ -69,11 +71,11 @@ public class ApOneHelloController {
 
     /**
      * 自定义限流规则
-     * @return
+     * @return string
      */
     @GetMapping(value = "/testRule2")
     public String testRule2() {
-        if (SphO.entry("getHello")) {
+        if (SphO.entry(GET_HELLO)) {
             try {
                 log.info("apOne.testRule2 OK");
                 // 正常的业务逻辑
@@ -91,7 +93,7 @@ public class ApOneHelloController {
 
     /**
      * 定义隔离规则
-     * @PostConstruct 当前类的构造函数执行之后执行该方法
+     * 当前类的构造函数执行之后执行该方法
      */
     @PostConstruct
     public void initFlowRule() {
@@ -110,8 +112,8 @@ public class ApOneHelloController {
 
     /**
      * 限流响应信息
-     * @param blockException
-     * @return
+     * @param blockException ex
+     * @return string
      */
     public String exceptionHandler(BlockException blockException){
         // 降级方案
