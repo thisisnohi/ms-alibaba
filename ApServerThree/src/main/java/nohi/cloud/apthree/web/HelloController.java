@@ -1,7 +1,7 @@
-package nohi.cloud.apotwo.web;
+package nohi.cloud.apthree.web;
 
 import lombok.extern.slf4j.Slf4j;
-import nohi.cloud.apotwo.config.ApConfig;
+import nohi.cloud.apthree.config.ApConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;

@@ -5,11 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author NOHI
  * 2022-06-05 22:29
  **/
+@EnableScheduling
 @SpringBootApplication
 @EnableDiscoveryClient
 @Slf4j

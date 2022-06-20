@@ -1,7 +1,7 @@
-package nohi.cloud.apotwo.web;
+package nohi.cloud.apthree.web;
 
 import lombok.extern.slf4j.Slf4j;
-import nohi.cloud.apotwo.config.ApConfig;
+import nohi.cloud.apthree.config.ApConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Slf4j
 @RefreshScope
-public class HelloController {
+public class ApTwoHelloController {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
     @Autowired
@@ -40,18 +40,17 @@ public class HelloController {
     @RequestMapping(value = "/echo/{str}", method = RequestMethod.GET)
     public String echo(@PathVariable String str) {
         log.info("ApServerTwo.conf1:{}", conf1);
-        log.info("ApServerTwo.str:{}", str);
-        return "Cur[AP-TWO]" + str;
-    }
-
-    @RequestMapping(value = "/echoFromTwo/{str}", method = RequestMethod.GET)
-    public String echoFromTwo(@PathVariable String str) {
-        log.info("ApServerTwo.conf1:{}", conf1);
         log.info("echo..{}", str);
         // 方式一
-        String resp = restTemplate.getForObject("http://apserver-two/echo/" + str, String.class);
+        String resp = restTemplate.getForObject("http://apserver-one/echo/" + str, String.class);
         log.info("resp..{}", resp);
-        return "Cur[AP-ONE].echoFromTwo [AP-TWO]响应:" + resp;
+
+        // 方式二
+        // 使用 LoadBalanceClient 和 RestTemplate 结合的方式来访问
+        ServiceInstance serviceInstance = loadBalancerClient.choose("apserver-one");
+        String url = String.format("http://%s:%s/echo/%s", serviceInstance.getHost(), serviceInstance.getPort(), appName);
+        log.info("request url:" + url);
+        return "Cur[AP-TWO] [AP-ONE]响应:" + restTemplateNoLA.getForObject(url, String.class);
     }
 
 }

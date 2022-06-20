@@ -1,8 +1,16 @@
-### 测试sentinel
-GET http://{{ server }}/echo/111
+
 
 ### 1
 GET http://{{ server }}/
 
-### 2测试sentinel
-GET http://{{ server }}/echoFromTwo/111
+### 自定义限流规则 testRule
+GET http://{{ server }}/testRule
+
+### 自定义限流规则 testRule2
+GET http://{{ server }}/testRule2
+
+### apOne回显 /echo/{str}
+GET http://{{ server }}/echo/111
+
+### apOne请求apTwo /echoFromTwo/{str}
+GET http://{{ server }}/echoFromTwo/who
