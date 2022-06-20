@@ -1,0 +1,8 @@
+### 测试sentinel
+GET http://{{ server }}/echo/111
+
+### 1
+GET http://{{ server }}/
+
+### 2测试sentinel
+GET http://{{ server }}/echoFromTwo/111

@@ -1,0 +1,6 @@
+### echo
+GET http://{{apthree}}/echo/abc
+
+### index
+GET http://{{apthree}}/
+
