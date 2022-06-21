@@ -18,7 +18,7 @@ public class DiscoveryConfig {
     }
 
     @Bean
-    public RestTemplate restTemplateNoLA() {
+    public RestTemplate restTemplateNoLa() {
         return new RestTemplate();
     }
 }

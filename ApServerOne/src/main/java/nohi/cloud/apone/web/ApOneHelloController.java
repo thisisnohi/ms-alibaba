@@ -10,6 +10,7 @@ import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import lombok.extern.slf4j.Slf4j;
 import nohi.cloud.apone.config.ApConfig;
+import nohi.cloud.apone.feign.intf.EchoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -35,12 +36,12 @@ public class ApOneHelloController {
     private RestTemplate restTemplate;
     @Autowired
     RestTemplate restTemplateNoLa;
-    @Value("${spring.application.name:}")
-    private String appName;
     @Value("${test.conf1:conf1}")
     private String conf1;
     @Autowired
     private ApConfig apConfig;
+    @Autowired
+    private EchoService echoService;
 
     private final String GET_HELLO = "getHello";
 
@@ -131,7 +132,7 @@ public class ApOneHelloController {
     @RequestMapping(value = "/echoFromTwo/{str}", method = RequestMethod.GET)
     @SentinelResource("apOne请求apTwo")
     public String echoFromTwo(@PathVariable String str) {
-        log.info("ApServerTwo.conf1:{}", conf1);
+        log.info("ApServerOne.conf1:{}", conf1);
         log.info("echo..{}", str);
         // 方式一
         String resp = restTemplate.getForObject("http://apserver-two/echo/" + str, String.class);
@@ -139,4 +140,12 @@ public class ApOneHelloController {
         return "Cur[AP-ONE].echoFromTwo [AP-TWO]响应:" + resp;
     }
 
+    @RequestMapping(value = "/echoFromTwoWithFeignClient/{str}", method = RequestMethod.GET)
+    public String echoFromTwoWithFeignClient(@PathVariable String str) {
+        log.info("ApServerOne.echoFromTwoWithFeignClient.conf1:{}", conf1);
+        log.info("echo..{}", str);
+        String resp = echoService.echo(str);
+        log.info("resp..{}", resp);
+        return "Cur[AP-ONE].echoFromTwoWithFeignClient [AP-TWO]响应:" + resp;
+    }
 }

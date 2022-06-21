@@ -41,6 +41,10 @@ public class ApTwoHelloController {
     public String echo(@PathVariable String str) {
         log.info("ApServerTwo.conf1:{}", conf1);
         log.info("echo..{}", str);
+
+//        if ("1".equalsIgnoreCase("1")) {
+//            throw new RuntimeException("人工异常");
+//        }
         // 方式一
         String resp = restTemplate.getForObject("http://apserver-one/echo/" + str, String.class);
         log.info("resp..{}", resp);

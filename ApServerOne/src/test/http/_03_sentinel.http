@@ -14,3 +14,7 @@ GET http://{{ server }}/echo/111
 
 ### apOne请求apTwo /echoFromTwo/{str}
 GET http://{{ server }}/echoFromTwo/who
+
+
+### echoFromTwoWithFeignClient /echoFromTwoWithFeignClient/{str}
+GET http://{{ server }}/echoFromTwoWithFeignClient/feignclient
