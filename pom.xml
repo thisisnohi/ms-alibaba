@@ -12,6 +12,10 @@
   <modules>
     <module>ApServerOne</module>
     <module>ApServerTwo</module>
+    <module>ApserverThree</module>
+    <module>dubbo-model-api</module>
+    <module>dubbo-service-customer</module>
+    <module>dubbo-service-provider</module>
   </modules>
 
   <parent>

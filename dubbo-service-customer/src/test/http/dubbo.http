@@ -1,0 +1,2 @@
+### dubbo test
+GET http://{{server}}/dubbo/111
