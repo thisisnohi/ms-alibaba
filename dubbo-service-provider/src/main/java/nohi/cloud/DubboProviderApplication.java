@@ -1,5 +1,6 @@
 package nohi.cloud;
 
+import com.alibaba.cloud.dubbo.autoconfigure.DubboServiceRegistrationAutoConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author NOHI
  * 2022-06-05 22:29
  **/
-@SpringBootApplication
+@SpringBootApplication(exclude = DubboServiceRegistrationAutoConfiguration.class)
 @EnableDiscoveryClient
 @Slf4j
 public class DubboProviderApplication {
