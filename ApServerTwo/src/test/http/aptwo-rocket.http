@@ -1,0 +1,4 @@
+
+
+### 1
+GET http://{{ server }}/messageProducer/abc

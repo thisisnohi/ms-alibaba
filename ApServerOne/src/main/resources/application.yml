@@ -9,3 +9,8 @@ spring:
 feign:
   sentinel:
     enabled: true
+
+rocketmq:
+  name-server: 10.0.0.59:9876
+  producer:
+    group: cloud-alibaba-group

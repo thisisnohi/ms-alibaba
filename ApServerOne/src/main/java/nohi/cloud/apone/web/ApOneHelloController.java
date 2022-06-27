@@ -11,6 +11,7 @@ import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import lombok.extern.slf4j.Slf4j;
 import nohi.cloud.apone.config.ApConfig;
 import nohi.cloud.apone.feign.intf.EchoService;
+import nohi.cloud.apone.service.MessageProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,9 @@ public class ApOneHelloController {
     private ApConfig apConfig;
     @Autowired
     private EchoService echoService;
+
+    @Resource
+    private MessageProducer messageProducer;
 
     private final String GET_HELLO = "getHello";
 
@@ -147,5 +152,18 @@ public class ApOneHelloController {
         String resp = echoService.echo(str);
         log.info("resp..{}", resp);
         return "Cur[AP-ONE].echoFromTwoWithFeignClient [AP-TWO]响应:" + resp;
+    }
+
+    /**
+     * rocketmq 生产消息
+     * @param msg
+     * @return
+     */
+    @RequestMapping(value = "/messageProducer/{msg}", method = RequestMethod.GET)
+    public String messageProducer(@PathVariable String msg) {
+        log.info("msg..{}", msg);
+        messageProducer.abc(msg == null ? " is null" : msg);
+        log.info("发送结束");
+        return "OK";
     }
 }

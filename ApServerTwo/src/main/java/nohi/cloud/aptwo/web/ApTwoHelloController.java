@@ -2,6 +2,7 @@ package nohi.cloud.aptwo.web;
 
 import lombok.extern.slf4j.Slf4j;
 import nohi.cloud.aptwo.config.ApConfig;
+import nohi.cloud.aptwo.service.MessageProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -30,6 +31,8 @@ public class ApTwoHelloController {
     private String conf1;
     @Autowired
     private ApConfig apConfig;
+    @Autowired
+    private MessageProducer messageProducer;
 
     @GetMapping(value = "/")
     public String index() {
@@ -55,6 +58,19 @@ public class ApTwoHelloController {
         String url = String.format("http://%s:%s/echo/%s", serviceInstance.getHost(), serviceInstance.getPort(), appName);
         log.info("request url:" + url);
         return "Cur[AP-TWO] [AP-ONE]响应:" + restTemplateNoLa.getForObject(url, String.class);
+    }
+
+    /**
+     * rocketmq 生产消息
+     * @param msg
+     * @return
+     */
+    @RequestMapping(value = "/messageProducer/{msg}", method = RequestMethod.GET)
+    public String messageProducer(@PathVariable String msg) {
+        log.info("msg..{}", msg);
+        messageProducer.abc(msg == null ? " is null" : msg);
+        log.info("发送结束");
+        return "OK";
     }
 
 }

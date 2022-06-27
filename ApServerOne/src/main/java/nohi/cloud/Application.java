@@ -19,10 +19,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Slf4j
 public class Application {
     public static void main(String[] args) {
-        try(ConfigurableApplicationContext applicationContext = SpringApplication.run(Application.class, args)){
-            String userName = applicationContext.getEnvironment().getProperty("user.name");
-            String userAge = applicationContext.getEnvironment().getProperty("user.age");
-            log.info("userName:{},userAge:{}", userName, userAge);
-        }
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(Application.class, args);
+        String userName = applicationContext.getEnvironment().getProperty("user.name");
+        String userAge = applicationContext.getEnvironment().getProperty("user.age");
+        log.info("userName:{},userAge:{}", userName, userAge);
     }
 }
